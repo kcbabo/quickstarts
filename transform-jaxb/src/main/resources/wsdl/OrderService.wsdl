@@ -1,38 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <definitions 
-    targetNamespace="urn:switchyard-quickstart-transform-jaxb:1.0" 
+    targetNamespace="urn:switchyard-quickstart:transform-jaxb:1.0" 
     xmlns="http://schemas.xmlsoap.org/wsdl/" 
-    xmlns:tns="urn:switchyard-quickstart-transform-jaxb:1.0"
+    xmlns:tns="urn:switchyard-quickstart:transform-jaxb:1.0"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
     
   <types>
     <xsd:schema 
-        targetNamespace="urn:switchyard-quickstart-transform-jaxb:1.0" 
-        xmlns:tns="urn:switchyard-quickstart-transform-jaxb:1.0" 
+        targetNamespace="urn:switchyard-quickstart:transform-jaxb:1.0" 
+        xmlns:tns="urn:switchyard-quickstart:transform-jaxb:1.0" 
         xmlns:xs="http://www.w3.org/2001/XMLSchema">
-        <xs:element name="submitOrder" type="tns:Order"/>
-        <xs:element name="submitOrderResponse" type="tns:OrderAck"/>
-        <xs:element name="order" type="tns:orderType"/>
-        <xs:element name="orderAck" type="tns:orderAckType"/>
-        <xs:complexType name="Order">
-            <xs:sequence>
-                <xs:element name="order" type="tns:orderType"/>
-            </xs:sequence>
-        </xs:complexType>
-        <xs:complexType name="OrderAck">
-            <xs:sequence>
-                <xs:element name="orderAck" type="tns:orderAckType"/>
-            </xs:sequence>
-        </xs:complexType>
-        <xs:complexType name="orderType">
+        <xs:element name="order" type="tns:order"/>
+        <xs:complexType name="order">
             <xs:sequence>
                 <xs:element name="orderId" type="xs:string"/>
                 <xs:element name="itemId" type="xs:string"/>
                 <xs:element name="quantity" type="xs:int"/>
             </xs:sequence>
         </xs:complexType>
-        <xs:complexType name="orderAckType">
+        <xs:element name="orderAck" type="tns:orderAck"/>
+        <xs:complexType name="orderAck">
             <xs:sequence>
                 <xs:element name="orderId" type="xs:string"/>
                 <xs:element name="accepted" type="xs:boolean"/>
@@ -43,10 +31,10 @@
   </types>
   
   <message name="submitOrder">
-    <part name="parameters" element="tns:submitOrder"/>
+    <part name="parameters" element="tns:order"/>
   </message>
   <message name="submitOrderResponse">
-    <part name="parameters" element="tns:submitOrderResponse"/>
+    <part name="parameters" element="tns:orderAck"/>
   </message>
   
   <portType name="OrderService">
@@ -59,7 +47,7 @@
   <binding name="OrderServiceBinding" type="tns:OrderService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
     <operation name="submitOrder">
-      <soap:operation soapAction="urn:switchyard-quickstart-transform-jaxb:1.0"/>
+      <soap:operation soapAction="urn:switchyard-quickstart:transform-jaxb:1.0"/>
       <input>
         <soap:body use="literal"/>
       </input>
