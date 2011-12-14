@@ -23,7 +23,8 @@ JBoss AS 7
       - SOAP-UI : Use the wsdl for this project (src/main/resources/wsdl/OrderService.wsdl) to create a soap-ui project.    Use the sample request (src/test/resources/xml/soap-request.xml) as an example of a sample request.  The output below is the expected output :
 
 
-`<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">  
+```
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">  
    <SOAP-ENV:Header/>  
        <SOAP-ENV:Body>  
            <orders:submitOrderResponse xmlns:orders="urn:switchyard-quickstart:bean-service:1.0">  
@@ -34,7 +35,8 @@ JBoss AS 7
                </orderAck>  
            </orders:submitOrderResponse>  
        </SOAP-ENV:Body>  
-</SOAP-ENV:Envelope>`
+</SOAP-ENV:Envelope>
+```
 
 ## Further Reading
 
