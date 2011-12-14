@@ -1,6 +1,10 @@
 Introduction
 ============
-This quickstart demonstrates the usage of the bean component.   This example shows a bean component service, OrderService, which is provided through the OrderServiceBean, and an InventoryService which is provided through the InventoryServiceBean implementation.    Orders are submitted through the OrderService, and the OrderService then looks items up in the InventoryService to see if they are in stock and the order can be processed.
+This quickstart demonstrates the usage of the bean component.   This example shows a bean component 
+service, OrderService, which is provided through the OrderServiceBean, and an InventoryService which 
+is provided through the InventoryServiceBean implementation.    Orders are submitted through the 
+OrderService, and the OrderService then looks items up in the InventoryService to see if they are in 
+stock and the order can be processed.
 
 This example is invoked through a SOAP gateway binding.  
 
@@ -20,7 +24,9 @@ JBoss AS 7
       - Submit a request with your preferred SOAP client - 
 	src/test/resources/xml contains sample requests and the responses
 	that you should see
-      - SOAP-UI : Use the wsdl for this project (src/main/resources/wsdl/OrderService.wsdl) to create a soap-ui project.    Use the sample request (src/test/resources/xml/soap-request.xml) as an example of a sample request.  The output below is the expected output :
+      - SOAP-UI : Use the wsdl for this project (src/main/resources/wsdl/OrderService.wsdl) to create 
+        a soap-ui project.    Use the sample request (src/test/resources/xml/soap-request.xml) as an 
+        example of a sample request.  The output below is the expected output :
 
 
 ```
