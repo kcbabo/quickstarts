@@ -11,5 +11,12 @@
   <artifactId>switchyard-quickstart-bpel-service-say-hello</artifactId>
   <name>Quickstart : BPEL Service : Say Hello</name>
   <packaging>jar</packaging>
+  
+  <dependencies>
+    <dependency>
+       <groupId>org.jboss.naming</groupId>
+       <artifactId>jnpserver</artifactId>
+    </dependency>
+  </dependencies>
 
 </project>
