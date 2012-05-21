@@ -8,8 +8,7 @@ in stock and the order can be processed.
 
 This example is invoked through a SOAP gateway binding.  
 
-![Bean Service Quickstart](/bean-service.jpg)
-
+![Bean Service Quickstart](http://github.com/kcbabo/quickstarts/tree/testjpg/bean-service/bean-service.jpg)
 
 Running the quickstart
 ======================
