@@ -26,6 +26,7 @@ import junit.framework.Assert;
 import org.apache.activemq.ActiveMQConnectionMetaData;
 import org.jboss.shrinkwrap.api.exporter.ZipExporter;
 import org.jboss.shrinkwrap.api.spec.ResourceAdapterArchive;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.switchyard.Exchange;
@@ -53,6 +54,7 @@ import org.switchyard.test.SwitchYardTestKit;
         config = SwitchYardTestCaseConfig.SWITCHYARD_XML,
         mixins = {NamingMixIn.class, TransactionMixIn.class, ActiveMQMixIn.class, JCAMixIn.class, CDIMixIn.class}
 )
+@Ignore
 public class JCAInflowBindingTest {
     
     private SwitchYardTestKit _testKit;

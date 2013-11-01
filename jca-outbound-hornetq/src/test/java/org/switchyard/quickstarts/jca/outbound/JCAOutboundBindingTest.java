@@ -24,6 +24,7 @@ import javax.jms.Session;
 import javax.jms.TextMessage;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.switchyard.test.BeforeDeploy;
@@ -45,6 +46,7 @@ import org.switchyard.component.test.mixins.jca.ResourceAdapterConfig;
         config = SwitchYardTestCaseConfig.SWITCHYARD_XML,
         mixins = {HornetQMixIn.class, JCAMixIn.class, CDIMixIn.class}
 )
+@Ignore
 public class JCAOutboundBindingTest {
     private static final String ORDER_QUEUE = "OrderQueue";
     private static final String SHIPPING_QUEUE = "ShippingQueue";

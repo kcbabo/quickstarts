@@ -21,6 +21,7 @@ import javax.jms.TextMessage;
 
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.switchyard.component.test.mixins.cdi.CDIMixIn;
@@ -39,6 +40,7 @@ import org.switchyard.test.SwitchYardTestCaseConfig;
         config = SwitchYardTestCaseConfig.SWITCHYARD_XML,
         mixins = {HornetQMixIn.class, JCAMixIn.class, CDIMixIn.class}
 )
+@Ignore
 public class JmsBindingTest {
     private static final String QUEUE_IN = "policyQSTransacted";
     private static final String QUEUE_IN_NOTX = "policyQSNonTransacted";

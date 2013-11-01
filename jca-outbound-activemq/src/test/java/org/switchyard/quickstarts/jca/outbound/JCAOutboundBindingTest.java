@@ -28,6 +28,7 @@ import org.apache.activemq.ActiveMQConnectionMetaData;
 import org.jboss.shrinkwrap.api.exporter.ZipExporter;
 import org.jboss.shrinkwrap.api.spec.ResourceAdapterArchive;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.switchyard.component.test.mixins.activemq.ActiveMQMixIn;
@@ -50,6 +51,7 @@ import org.switchyard.test.SwitchYardTestCaseConfig;
         config = SwitchYardTestCaseConfig.SWITCHYARD_XML,
         mixins = {ActiveMQMixIn.class, JCAMixIn.class, CDIMixIn.class}
 )
+@Ignore
 public class JCAOutboundBindingTest {
     private static final String ORDER_QUEUE = "OrderQueue";
     private static final String SHIPPING_QUEUE = "ShippingQueue";

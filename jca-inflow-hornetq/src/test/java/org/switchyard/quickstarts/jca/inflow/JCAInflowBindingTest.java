@@ -18,6 +18,7 @@ import javax.jms.TextMessage;
 
 import junit.framework.Assert;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.switchyard.Exchange;
@@ -42,6 +43,7 @@ import org.switchyard.component.test.mixins.jca.ResourceAdapterConfig;
         config = SwitchYardTestCaseConfig.SWITCHYARD_XML,
         mixins = {HornetQMixIn.class, JCAMixIn.class, CDIMixIn.class}
 )
+@Ignore
 public class JCAInflowBindingTest {
     
     private SwitchYardTestKit _testKit;
