@@ -17,24 +17,33 @@
 package org.switchyard.quickstarts.bean.service;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.switchyard.component.bean.Reference;
+import org.switchyard.component.bean.ReferenceInvoker;
 import org.switchyard.component.bean.Service;
 
 @Service(OrderService.class)
 public class OrderServiceBean implements OrderService {
 
     @Inject
-    @Reference
-    private InventoryService _inventory;
+    @Reference("InventoryService")
+    private ReferenceInvoker _inventory;
+    
+    @Inject @Named("ExtraBean")
+    private Extra extras;
 
     @Override
     public OrderAck submitOrder(Order order) {
+        System.out.println("=========== Calling normal CDI Bean ===========");
+        extras.execute();
         // Create an order ack
         OrderAck orderAck = new OrderAck().setOrderId(order.getOrderId());
         // Check the inventory
         try {
-            Item orderItem = _inventory.lookupItem(order.getItemId());
+            System.out.println("=========== Using ReferenceInvoker ===========");
+            Item orderItem = _inventory.newInvocation("lookupItem")
+                    .invoke(order.getItemId()).getMessage().getContent(Item.class);
             // Check quantity on hand and generate the ack
             if (orderItem.getQuantity() >= order.getQuantity()) {
                 orderAck.setAccepted(true).setStatus("Order Accepted");
@@ -43,6 +52,10 @@ public class OrderServiceBean implements OrderService {
             }
         } catch (ItemNotFoundException infEx) {
             orderAck.setAccepted(false).setStatus("Item Not Available");
+        }
+        catch (Exception ex) {
+            System.out.println("failed with reference invoker");
+            ex.printStackTrace();
         }
         return orderAck;
     }
