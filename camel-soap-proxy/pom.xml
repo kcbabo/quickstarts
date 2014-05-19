@@ -24,7 +24,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>switchyard-camel-soap-proxy</artifactId>
-    <packaging>jar</packaging>
+    <packaging>bundle</packaging>
     <name>SwitchYard Quickstart: camel-soap-proxy</name>
     <description>Quickstart : Camel SOAP Proxy</description>
     <licenses>
@@ -38,6 +38,14 @@
         <deploy.skip>true</deploy.skip>
         <maven.compiler.target>1.6</maven.compiler.target>
         <maven.compiler.source>1.6</maven.compiler.source>
+        <switchyard.osgi.export.pkg>
+            org.switchyard.quickstarts.camel.soap.proxy*
+        </switchyard.osgi.export.pkg>
+        <switchyard.osgi.require.capability>
+            org.ops4j.pax.cdi.extension; filter:="(extension=deltaspike-core-api)",
+            osgi.extender; filter:="(osgi.extender=pax.cdi)"
+        </switchyard.osgi.require.capability>
+        <switchyard.osgi.provide.capability />
     </properties>
     <dependencies>
         <dependency>
@@ -84,23 +92,6 @@
                     <execution>
                         <goals>
                             <goal>configure</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <warName>ReverseService</warName>
-                    <packagingExcludes>WEB-INF/lib/,WEB-INF/classes/META-INF/</packagingExcludes>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>make-a-war</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>war</goal>
                         </goals>
                     </execution>
                 </executions>
