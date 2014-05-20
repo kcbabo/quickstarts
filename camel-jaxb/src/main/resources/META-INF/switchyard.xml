@@ -15,20 +15,25 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<switchyard xmlns="urn:switchyard-config:switchyard:1.0">
-    <composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912" name="camel-jaxb" targetNamespace="urn:switchyard-quickstart:camel-jaxb:1.0">
-        <sca:service xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" name="GreetingService" promote="GreetingService/GreetingService">
-            <http:binding.http xmlns:http="urn:switchyard-component-http:config:1.0">
-                <http:contextPath>camel-binding</http:contextPath>
-            </http:binding.http>
-        </sca:service>
-        <component name="GreetingService">
-            <implementation.camel xmlns="urn:switchyard-component-camel:config:1.0">
-                <java class="org.switchyard.quickstarts.camel.jaxb.GreetingServiceRoute"/>
-            </implementation.camel>
-            <service name="GreetingService">
-                <interface.java interface="org.switchyard.quickstarts.camel.jaxb.GreetingService"/>
-            </service>
-        </component>
-    </composite>
+<switchyard xmlns="urn:switchyard-config:switchyard:1.0" xmlns:camel="urn:switchyard-component-camel:config:1.0" xmlns:http="urn:switchyard-component-http:config:1.0" xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" xmlns:soap="urn:switchyard-component-soap:config:1.0">
+  <sca:composite name="camel-jaxb" targetNamespace="urn:switchyard-quickstart:camel-jaxb:1.0">
+    <sca:service name="GreetingService" promote="GreetingService/GreetingService">
+      <sca:interface.wsdl interface="GreetingService.wsdl#wsdl.porttype(GreetingServicePortType)"/>
+      <soap:binding.soap name="soap1">
+        <soap:wsdl>GreetingService.wsdl</soap:wsdl>
+      </soap:binding.soap>
+    </sca:service>
+    <sca:component name="GreetingService">
+      <camel:implementation.camel>
+        <camel:java class="org.switchyard.quickstarts.camel.jaxb.GreetingServiceRoute"/>
+      </camel:implementation.camel>
+      <sca:service name="GreetingService">
+        <sca:interface.java interface="org.switchyard.quickstarts.camel.jaxb.GreetingService"/>
+      </sca:service>
+    </sca:component>
+  </sca:composite>
+  <transforms>
+       <transform.java xmlns="urn:switchyard-config:transform:1.0" class="org.switchyard.quickstarts.camel.jaxb.Transformers" from="java:org.switchyard.quickstarts.camel.jaxb.GreetingResponse" to="{urn:switchyard-quickstart:camel-jaxb:1.0}greetingResponse"/>
+       <transform.java xmlns="urn:switchyard-config:transform:1.0" class="org.switchyard.quickstarts.camel.jaxb.Transformers" from="{urn:switchyard-quickstart:camel-jaxb:1.0}greetingRequest" to="java:org.switchyard.quickstarts.camel.jaxb.GreetingRequest"/>
+   </transforms>
 </switchyard>

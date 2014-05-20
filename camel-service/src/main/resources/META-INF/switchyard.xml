@@ -15,29 +15,35 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<switchyard xmlns="urn:switchyard-config:switchyard:1.0" xmlns:camel="urn:switchyard-component-camel:config:1.0" xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912">
-    <sca:composite name="camel-service" targetNamespace="urn:switchyard-quickstart:camel-service:0.1.0">
-        <sca:service name="JavaDSL" promote="JavaDSLBuilder/JavaDSL">
-            <sca:binding.sca/>
-        </sca:service>
-        <sca:component name="JavaDSLBuilder">
-            <camel:implementation.camel>
-                <camel:java class="org.switchyard.quickstarts.camel.service.JavaDSLBuilder"/>
-            </camel:implementation.camel>
-            <sca:service name="JavaDSL">
-                <sca:interface.java interface="org.switchyard.quickstarts.camel.service.JavaDSL"/>
-            </sca:service>
-            <sca:reference name="XMLService">
-                <interface.esb inputType="java:java.lang.String"/>
-            </sca:reference>
-        </sca:component>
-        <sca:component name="XMLComponent">
-            <camel:implementation.camel>
-                <camel:xml path="META-INF/route.xml"/>
-            </camel:implementation.camel>
-            <sca:service name="XMLService">
-                <interface.esb inputType="java:java.lang.String"/>
-            </sca:service>
-        </sca:component>
-    </sca:composite>
+<switchyard xmlns="urn:switchyard-config:switchyard:1.0" xmlns:camel="urn:switchyard-component-camel:config:1.0" xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" xmlns:soap="urn:switchyard-component-soap:config:1.0">
+  <sca:composite name="camel-service" targetNamespace="urn:switchyard-quickstart:camel-service:0.1.0">
+    <sca:service name="JavaDSL" promote="JavaDSLBuilder/JavaDSL">
+      <sca:interface.wsdl interface="JavaDSL.wsdl#wsdl.porttype(JavaDSLPortType)"/>
+      <soap:binding.soap name="soap1">
+        <soap:wsdl>JavaDSL.wsdl</soap:wsdl>
+      </soap:binding.soap>
+    </sca:service>
+    <sca:component name="JavaDSLBuilder">
+      <camel:implementation.camel>
+        <camel:java class="org.switchyard.quickstarts.camel.service.JavaDSLBuilder"/>
+      </camel:implementation.camel>
+      <sca:service name="JavaDSL">
+        <sca:interface.java interface="org.switchyard.quickstarts.camel.service.JavaDSL"/>
+      </sca:service>
+      <sca:reference name="XMLService">
+        <interface.esb inputType="java:java.lang.String"/>
+      </sca:reference>
+    </sca:component>
+    <sca:component name="XMLComponent">
+      <camel:implementation.camel>
+        <camel:xml path="META-INF/route.xml"/>
+      </camel:implementation.camel>
+      <sca:service name="XMLService">
+        <interface.esb inputType="java:java.lang.String"/>
+      </sca:service>
+    </sca:component>
+  </sca:composite>
+  <transforms>
+        <transform.java xmlns="urn:switchyard-config:transform:1.0" class="org.switchyard.quickstarts.camel.service.Transformers" from="{urn:switchyard-quickstart:camel-service:0.1.0}acceptMessage" to="java:java.lang.String"/>
+    </transforms>
 </switchyard>

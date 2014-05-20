@@ -16,6 +16,8 @@
  */
 package org.switchyard.quickstarts.camel.service;
 
+import org.switchyard.annotations.OperationTypes;
+
 public interface JavaDSL {
     public void acceptMessage(String input);
 }
